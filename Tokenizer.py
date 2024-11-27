@@ -11,11 +11,15 @@ class Tokenizer:
         while token_counts[top_pair] > 1:
             new_token = self.get_token_integer(tokens)
             new_list = []
-            for token1, token2 in zip(tokens, tokens[1:]):
+            i = 0
+            while i < len(tokens)-1:
+                token1, token2 = tokens[i], tokens[i+1]
                 if (token1, token2) == top_pair:
                     new_list.append(new_token)
+                    i += 2
                 else:
                     new_list.append(token1)
+                    i += 1
             tokens = new_list
             token_counts = self.count_tokens(tokens)
             top_pair = max(token_counts, key=token_counts.get)
