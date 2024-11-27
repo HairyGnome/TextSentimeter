@@ -11,6 +11,9 @@ env/
 venv/
 .venv/
 
+# Dataset
+data/
+
 # Distribution / packaging
 .Python
 build/
