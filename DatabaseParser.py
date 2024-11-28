@@ -44,8 +44,9 @@ class DatabaseParser:
                         estimated_time = time_elapsed/i * (1600000-i)
                     else:
                         estimated_time = 99999999999
+                    time_elapsed = self.sec_to_time(time_elapsed)
                     estimated_time = self.sec_to_time(estimated_time)
-                    output = f'Row number: {i}/1,600,000\tTime elapsed: {math.floor(time_elapsed)} s\tEstimated time left: {estimated_time[0]} days {estimated_time[1]} hours {estimated_time[2]} minutes {round(estimated_time[3])} seconds'
+                    output = f'Row number: {i}/1,600,000\tTime elapsed: {time_elapsed[0]} days {time_elapsed[1]} hours {time_elapsed[2]} minutes {math.floor(time_elapsed[3])} seconds\tEstimated time left: {estimated_time[0]} days {estimated_time[1]} hours {estimated_time[2]} minutes {round(estimated_time[3])} seconds'
                     sys.stdout.write(f'\r{output}')
                     sys.stdout.flush()
                     if i % self.test_ratio == 0:
@@ -63,6 +64,6 @@ class DatabaseParser:
 
 
 if __name__ == '__main__':
-    parser = DatabaseParser()
+    parser = DatabaseParser(10)
     data, label = parser.parse_data(os.curdir + '/data/dataset.csv')
     print(data[:5])
