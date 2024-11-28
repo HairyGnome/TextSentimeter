@@ -32,7 +32,8 @@ class Tokenizer:
 
     def count_tokens(self, tokens):
         count = {}
-
+        if len(tokens) == 1:
+            return {tokens[0]: 1}
         for token1, token2 in zip(tokens, tokens[1:]):
             if (token1, token2) in count:
                 count[(token1, token2)] += 1
