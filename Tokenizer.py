@@ -1,7 +1,7 @@
 class Tokenizer:
 
     def tokenize(self, text):
-        # make sure text is utf-8 encoded
+        # Ensure the text is encoded as bytes
         text = text.encode('utf-8')
         tokens = list(map(int, text))
 
@@ -12,14 +12,17 @@ class Tokenizer:
             new_token = self.get_token_integer(tokens)
             new_list = []
             i = 0
-            while i < len(tokens)-1:
-                token1, token2 = tokens[i], tokens[i+1]
+            while i < len(tokens) - 1:
+                token1, token2 = tokens[i], tokens[i + 1]
                 if (token1, token2) == top_pair:
                     new_list.append(new_token)
                     i += 2
                 else:
                     new_list.append(token1)
                     i += 1
+            if i < len(tokens):
+                new_list.append(tokens[-1])
+
             tokens = new_list
             token_counts = self.count_tokens(tokens)
             top_pair = max(token_counts, key=token_counts.get)
@@ -52,5 +55,5 @@ class Tokenizer:
 
 if __name__ == '__main__':
     tokenizer = Tokenizer()
-    tokens = tokenizer.tokenize('Hello Hello HIHIHI')
+    tokens = tokenizer.tokenize('Gaius Julius')
     print(tokens)
