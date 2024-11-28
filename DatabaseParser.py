@@ -23,6 +23,8 @@ class DatabaseParser:
     def parseData(self, path):
         data = []
         labels = []
+        test_data = []
+        test_labels = []
         tokenizer = Tokenizer()
         try:
             with open(path, 'r') as csvfile:
@@ -42,8 +44,12 @@ class DatabaseParser:
                     output = f'Row number: {i}/1,600,000\tTime elapsed: {math.floor(time_elapsed)} s\tEstimated time left: {estimated_time[0]} days {estimated_time[1]} hours {estimated_time[2]} minutes {round(estimated_time[3])} seconds'
                     sys.stdout.write(f'\r{output}')
                     sys.stdout.flush()
-                    data.append(tokenizer.tokenize(row[5]))
-                    labels.append(row[0])
+                    if i % 10 == 0:
+                        test_data.append(tokenizer.tokenize(row[5]))
+                        test_labels.append(row[0])
+                    else:
+                        data.append(tokenizer.tokenize(row[5]))
+                        labels.append(row[0])
                     i += 1
 
             return data, labels
