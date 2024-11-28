@@ -12,9 +12,11 @@ from Tokenizer import Tokenizer
 class DatabaseParser:
 
     test_ratio = 10
+    generate_train_data = False
 
-    def __init__(self, ratio):
-        test_ratio = ratio
+    def __init__(self, ratio, generate_train_data):
+        self.test_ratio = ratio
+        self.generate_train_data = generate_train_data
 
     def sec_to_time(self, sec):
         days = math.floor(sec/86400)
@@ -49,8 +51,8 @@ class DatabaseParser:
                     output = f'Row number: {i}/1,600,000\tTime elapsed: {time_elapsed[0]} days {time_elapsed[1]} hours {time_elapsed[2]} minutes {math.floor(time_elapsed[3])} seconds\tEstimated time left: {estimated_time[0]} days {estimated_time[1]} hours {estimated_time[2]} minutes {round(estimated_time[3])} seconds'
                     sys.stdout.write(f'\r{output}')
                     sys.stdout.flush()
-                    if i % self.test_ratio == 0:
-                        eval_data.append(tokenizer.tokenize(row[5]))
+                    if self.generate_train_data and i % self.test_ratio == 0:
+                        eval_data.append(tokenizer.tokenize(row[5].strip()))
                         eval_labels.append(int(row[0]))
                     else:
                         data.append(tokenizer.tokenize(row[5]))
