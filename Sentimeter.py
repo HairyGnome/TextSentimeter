@@ -29,10 +29,8 @@ if __name__ == '__main__':
     model = create_model()
     model.compile(optimizer=tf.keras.optimizers.Adam(), loss=tf.keras.losses.MeanSquaredError(), metrics=['accuracy'])
 
-    db_parser = DatabaseParser(10)
+    db_parser = DatabaseParser(10, True)
     data, labels, eval_data, eval_labels = db_parser.parse_data(os.curdir + '/data/dataset.csv')
-
-    print(data)
 
     MAX_LENGTH = 100
     data = pad_sequences(data, padding='post', maxlen=MAX_LENGTH)
