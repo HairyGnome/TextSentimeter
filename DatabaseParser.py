@@ -11,6 +11,11 @@ from Tokenizer import Tokenizer
 
 class DatabaseParser:
 
+    test_ratio = 10
+
+    def __init__(self, ratio):
+        test_ratio = ratio
+
     def secToTime(self, sec):
         days = math.floor(sec/86400)
         sec = sec % 86400
@@ -44,7 +49,7 @@ class DatabaseParser:
                     output = f'Row number: {i}/1,600,000\tTime elapsed: {math.floor(time_elapsed)} s\tEstimated time left: {estimated_time[0]} days {estimated_time[1]} hours {estimated_time[2]} minutes {round(estimated_time[3])} seconds'
                     sys.stdout.write(f'\r{output}')
                     sys.stdout.flush()
-                    if i % 10 == 0:
+                    if i % self.test_ratio == 0:
                         test_data.append(tokenizer.tokenize(row[5]))
                         test_labels.append(row[0])
                     else:
