@@ -28,6 +28,8 @@ class DatabaseParser:
     def parse_data(self, path):
         data = []
         labels = []
+        eval_data = []
+        eval_labels = []
         tokenizer = Tokenizer()
         try:
             with open(path, 'r') as csvfile:
@@ -47,11 +49,15 @@ class DatabaseParser:
                     output = f'Row number: {i}/1,600,000\tTime elapsed: {math.floor(time_elapsed)} s\tEstimated time left: {estimated_time[0]} days {estimated_time[1]} hours {estimated_time[2]} minutes {round(estimated_time[3])} seconds'
                     sys.stdout.write(f'\r{output}')
                     sys.stdout.flush()
-                    data.append(tokenizer.tokenize(row[5]))
-                    labels.append(row[0])
+                    if i % self.test_ratio == 0:
+                        eval_data.append(tokenizer.tokenize(row[5]))
+                        eval_labels.append(row[0])
+                    else:
+                        data.append(tokenizer.tokenize(row[5]))
+                        labels.append(row[0])
                     i += 1
 
-            return data, labels
+            return data, labels, eval_data, eval_labels
 
         except FileNotFoundError:
             print('Error: File not found')
