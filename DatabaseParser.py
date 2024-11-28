@@ -16,7 +16,7 @@ class DatabaseParser:
     def __init__(self, ratio):
         test_ratio = ratio
 
-    def secToTime(self, sec):
+    def sec_to_time(self, sec):
         days = math.floor(sec/86400)
         sec = sec % 86400
         hours = math.floor(sec/3600)
@@ -25,11 +25,9 @@ class DatabaseParser:
         sec = sec % 60
         return days, hours, minutes, sec
 
-    def parseData(self, path):
+    def parse_data(self, path):
         data = []
         labels = []
-        test_data = []
-        test_labels = []
         tokenizer = Tokenizer()
         try:
             with open(path, 'r') as csvfile:
@@ -45,16 +43,12 @@ class DatabaseParser:
                         estimated_time = time_elapsed/i * (1600000-i)
                     else:
                         estimated_time = 99999999999
-                    estimated_time = self.secToTime(estimated_time)
+                    estimated_time = self.sec_to_time(estimated_time)
                     output = f'Row number: {i}/1,600,000\tTime elapsed: {math.floor(time_elapsed)} s\tEstimated time left: {estimated_time[0]} days {estimated_time[1]} hours {estimated_time[2]} minutes {round(estimated_time[3])} seconds'
                     sys.stdout.write(f'\r{output}')
                     sys.stdout.flush()
-                    if i % self.test_ratio == 0:
-                        test_data.append(tokenizer.tokenize(row[5]))
-                        test_labels.append(row[0])
-                    else:
-                        data.append(tokenizer.tokenize(row[5]))
-                        labels.append(row[0])
+                    data.append(tokenizer.tokenize(row[5]))
+                    labels.append(row[0])
                     i += 1
 
             return data, labels
@@ -65,5 +59,5 @@ class DatabaseParser:
 
 if __name__ == '__main__':
     parser = DatabaseParser()
-    data, label = parser.parseData(os.curdir+'/data/dataset.csv')
+    data, label = parser.parse_data(os.curdir + '/data/dataset.csv')
     print(data[:5])
