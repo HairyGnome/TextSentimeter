@@ -38,7 +38,6 @@ class DatabaseParser:
                 i = 0
                 start_time = time.time()
                 for row in csvreader:
-                    line_num = csvreader
                     curr_time = time.time()
                     time_elapsed = curr_time-start_time
                     if i != 0:
@@ -51,10 +50,10 @@ class DatabaseParser:
                     sys.stdout.flush()
                     if i % self.test_ratio == 0:
                         eval_data.append(tokenizer.tokenize(row[5]))
-                        eval_labels.append(row[0])
+                        eval_labels.append(int(row[0]))
                     else:
                         data.append(tokenizer.tokenize(row[5]))
-                        labels.append(row[0])
+                        labels.append(int(row[0]))
                     i += 1
 
             return data, labels, eval_data, eval_labels
