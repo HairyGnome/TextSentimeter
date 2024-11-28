@@ -26,8 +26,8 @@ if __name__ == '__main__':
     model = create_model()
 
     db_parser = DatabaseParser(10)
-    data, labels = db_parser.parse_data(os.curdir + '/data/dataset.csv')
+    data, labels, eval_data, eval_labels = db_parser.parse_data(os.curdir + '/data/dataset.csv')
 
     model.compile(optimizer=tf.keras.optimizers.Adam, loss=tf.keras.losses.MeanSquaredError, metrics=['accuracy', 'loss'])
-
     model.fit(data, labels, batch_size=batch_size, epochs=epochs, validation_split=0.1)
+    model.evaluate(eval_data, eval_labels)
