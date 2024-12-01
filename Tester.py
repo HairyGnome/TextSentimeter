@@ -1,8 +1,11 @@
 import os
 
 import pytest
+
+import DataSerializer
 from Tokenizer import Tokenizer
 from DatabaseParser import DatabaseParser
+from DataSerializer import DataSerializer
 
 
 def test_tokenizer():
@@ -22,3 +25,17 @@ def test_database_parser():
     assert eval_labels == []
     assert len(data) == 21
     assert len(labels) == 21
+
+def test_data_serializer():
+    serializer = DataSerializer()
+    data = {
+        'data': 'data1',
+        'some_data': 13,
+        'more_data': 0.42
+    }
+    labels = [[0, 0, 0, 0, 0], [0, 0, 0, 1, 0]]
+    path = 'test/serializer/test'
+    serializer.save((data, labels), path)
+    loaded_data, loaded_labels = serializer.load(path)
+    assert loaded_data == data
+    assert loaded_labels == labels
