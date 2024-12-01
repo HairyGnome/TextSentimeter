@@ -4,7 +4,6 @@ import os
 import sys
 import time
 
-from pyasn1_modules.rfc1902 import Integer
 
 from Tokenizer import Tokenizer
 
@@ -13,10 +12,12 @@ class DatabaseParser:
 
     test_ratio = 10
     generate_train_data = False
+    num_classes = 5
 
-    def __init__(self, ratio, generate_train_data):
+    def __init__(self, ratio = 10, generate_train_data = True, num_classes = 5):
         self.test_ratio = ratio
         self.generate_train_data = generate_train_data
+        self.num_classes = num_classes
 
     def sec_to_time(self, sec):
         days = math.floor(sec/86400)
@@ -53,17 +54,26 @@ class DatabaseParser:
                     sys.stdout.flush()
                     if self.generate_train_data and i % self.test_ratio == 0:
                         eval_data.append(tokenizer.tokenize(row[5].strip()))
-                        eval_labels.append(int(row[0]))
+                        eval_labels.append(self.get_label_vector(int(row[0])))
                     else:
                         data.append(tokenizer.tokenize(row[5]))
-                        labels.append(int(row[0]))
+                        labels.append(self.get_label_vector(int(row[0])))
                     i += 1
 
+            sys.stdout.write('\n')
             return data, labels, eval_data, eval_labels
 
         except FileNotFoundError:
             print('Error: File not found')
 
+    def get_label_vector(self, label):
+        label_vector = []
+        for i in range(self.num_classes):
+            if i == label:
+                label_vector.append(1)
+            else:
+                label_vector.append(0)
+        return label_vector
 
 if __name__ == '__main__':
     parser = DatabaseParser(10)
