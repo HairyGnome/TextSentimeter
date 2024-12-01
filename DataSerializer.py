@@ -20,7 +20,7 @@ class DataSerializer:
             return loaded_data
         except FileNotFoundError:
             sys.stdout.write('Error: File not found')
-            return
+            return ()
 
 if __name__ == '__main__':
     serializer = DataSerializer()

@@ -3,7 +3,7 @@ import numpy
 import tensorflow as tf
 from keras.utils import pad_sequences
 
-from DatabaseParser import DatabaseParser
+from DataSerializer import DataSerializer
 
 batch_size = 256
 epochs = 5
@@ -28,8 +28,9 @@ if __name__ == '__main__':
     model = create_model()
     model.compile(optimizer=tf.keras.optimizers.Adam(), loss=tf.keras.losses.categorical_crossentropy, metrics=['accuracy'])
 
-    db_parser = DatabaseParser(10, True)
-    data, labels, eval_data, eval_labels = db_parser.parse_data(os.curdir + '/data/dataset.csv')
+    serializer = DataSerializer()
+    data, labels = serializer.load('/data/training')
+    eval_data, eval_labels = serializer.load('/data/evaluation')
 
 
     MAX_LENGTH = 100
