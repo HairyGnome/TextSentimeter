@@ -14,6 +14,9 @@ venv/
 # Dataset
 data/
 
+# Test
+test/
+
 # Distribution / packaging
 .Python
 build/
