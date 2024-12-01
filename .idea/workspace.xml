@@ -6,8 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="ab28e219-6a9c-4f07-af89-565ed218cb1d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataSerializer.py" beforeDir="false" afterPath="$PROJECT_DIR$/DataSerializer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tester.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tester.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,6 +46,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Python tests.Python tests in Tester.py.executor": "Run",
+    "Python.DataSerializer.executor": "Run",
     "Python.DatabaseParser.executor": "Run",
     "Python.Sentimeter.executor": "Run",
     "Python.Tester.executor": "Run",
