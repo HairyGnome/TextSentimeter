@@ -10,13 +10,17 @@ from TimeCalculator import sec_to_time
 
 class DataSerializer:
     def save(self, data, path):
+        start_time = time.time()
         joblib.dump(data, f'{os.curdir}/{path}')
-        sys.stdout.write('\nData saved!\n')
+        time_elapsed = sec_to_time(time.time() - start_time)
+        sys.stdout.write(f'\nData saved in {time_elapsed[0]} days {time_elapsed[1]} hours {time_elapsed[2]} minutes {time_elapsed[3]} seconds\n')
 
     def load(self, path):
         try:
+            start_time = time.time()
             loaded_data = joblib.load(path)
-            sys.stdout.write('\nData loaded!\n')
+            time_elapsed = sec_to_time(time.time()-start_time)
+            sys.stdout.write(f'\nData loaded in {time_elapsed[0]} days {time_elapsed[1]} hours {time_elapsed[2]} minutes {time_elapsed[3]} seconds\n')
             return loaded_data
         except FileNotFoundError:
             sys.stdout.write('Error: File not found')
