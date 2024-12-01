@@ -5,7 +5,9 @@ import sys
 import time
 
 
+
 from Tokenizer import Tokenizer
+from TimeCalculator import sec_to_time
 
 
 class DatabaseParser:
@@ -18,15 +20,6 @@ class DatabaseParser:
         self.test_ratio = ratio
         self.generate_train_data = generate_train_data
         self.num_classes = num_classes
-
-    def sec_to_time(self, sec):
-        days = math.floor(sec/86400)
-        sec = sec % 86400
-        hours = math.floor(sec/3600)
-        sec = sec % 3600
-        minutes = math.floor(sec/60)
-        sec = sec % 60
-        return days, hours, minutes, sec
 
     def parse_data(self, path):
         data = []
@@ -47,8 +40,8 @@ class DatabaseParser:
                         estimated_time = time_elapsed/i * (1600000-i)
                     else:
                         estimated_time = 99999999999
-                    time_elapsed = self.sec_to_time(time_elapsed)
-                    estimated_time = self.sec_to_time(estimated_time)
+                    time_elapsed = sec_to_time(time_elapsed)
+                    estimated_time = sec_to_time(estimated_time)
                     output = f'Row number: {i}/1,600,000\tTime elapsed: {time_elapsed[0]} days {time_elapsed[1]} hours {time_elapsed[2]} minutes {math.floor(time_elapsed[3])} seconds\tEstimated time left: {estimated_time[0]} days {estimated_time[1]} hours {estimated_time[2]} minutes {round(estimated_time[3])} seconds'
                     sys.stdout.write(f'\r{output}')
                     sys.stdout.flush()

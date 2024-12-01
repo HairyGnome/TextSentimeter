@@ -5,12 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ab28e219-6a9c-4f07-af89-565ed218cb1d" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/TextSentimenter.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/TextSentimenter.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TimeCalculator.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataSerializer.py" beforeDir="false" afterPath="$PROJECT_DIR$/DataSerializer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DatabaseParser.py" beforeDir="false" afterPath="$PROJECT_DIR$/DatabaseParser.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sentimeter.py" beforeDir="false" afterPath="$PROJECT_DIR$/Sentimeter.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
