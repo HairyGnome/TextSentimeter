@@ -5,14 +5,14 @@ import math
 import sys
 import os
 
+from DatabaseParser import DatabaseParser
 from TimeCalculator import sec_to_time
 
 class DataSerializer:
-
-    def save(self, data):
+    def save(self, data, path):
         saving_completed = False
         def save_data():
-            joblib.dump(data, f'{os.curdir}/data/dataset')
+            joblib.dump(data, f'{os.curdir}/{path}')
             callback()
 
         def callback():
@@ -33,9 +33,11 @@ class DataSerializer:
 
     def load(self, path):
         loading_completed = False
+        loaded_data = ()
 
         def load_data():
-            joblib.load(path)
+            nonlocal loaded_data
+            loaded_data = joblib.load(path)
             callback()
 
         def callback():
@@ -44,7 +46,11 @@ class DataSerializer:
 
         start_time = time.time()
         thread = threading.Thread(target=load_data())
-        thread.start()
+        try:
+            thread.start()
+        except FileNotFoundError:
+            sys.stdout.write('Error: File not found')
+            return
         while not loading_completed:
             time_elapsed = time.time() - start_time
             time_elapsed = math.floor(time_elapsed)
@@ -53,3 +59,11 @@ class DataSerializer:
             sys.stdout.write(f'\r{output}')
             sys.stdout.flush()
         sys.stdout.write('\nData loaded!\n')
+        return loaded_data
+
+
+if __name__ == '__main__':
+    serializer = DataSerializer()
+    parser = DatabaseParser()
+
+    parser.parse_data()
