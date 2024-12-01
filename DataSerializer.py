@@ -64,6 +64,7 @@ class DataSerializer:
 
 if __name__ == '__main__':
     serializer = DataSerializer()
-    parser = DatabaseParser()
-
-    parser.parse_data()
+    db_parser = DatabaseParser(10, True)
+    data, labels, eval_data, eval_labels = db_parser.parse_data(os.curdir + '/data/dataset.csv')
+    serializer.save((data, labels), '/data/training')
+    serializer.save((eval_data, eval_labels), '/data/evaluation')
