@@ -3,7 +3,7 @@
 ## Description
 This project is an AI model created to find out the sentiment of texts on its inputs. The output has five different values, going as: negative, slightly negative, neutral, slightly positive, positive.
 ## Dependencies
-The model is created and trained using Tensorflow 2.10.1, as this version supports using GPU for training on Windows, making the training process much quicker. For reasons of compatibility it uses numpy 2.26.4, an python 3.10.
+The model is created and trained using Tensorflow 2.10.1, as this version supports using GPU for training on Windows, making the training process much quicker. For reasons of compatibility it uses numpy 1.26.4, an python 3.10.
 ## Dataset
 The dataset used for training is Sentiment140, a dataset consisting of tweets with sentiment labels. It was uploaded by Μαριος Μιχαηλιδης KazAnova, and is available [here](https://www.kaggle.com/datasets/kazanova/sentiment140/data).
 ## Modules
